@@ -24,7 +24,10 @@
 }
 
 .container {
-	align-items: center;
+	display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
 }
 
 
@@ -37,7 +40,7 @@ body {
 h2 {
 	font-size: 24px;
 	text-transform: uppercase;
-	color: #28ace5;
+	color: #778899;
 	font-weight: 600;
 	margin-bottom: 30px;
 }
@@ -45,7 +48,7 @@ h2 {
 h3 {
 	font-size: 22px;
 	line-height: 1.375em;
-	color: #28ace5;
+	color: #778899;
 	font-weight: 500;
 	margin-bottom: 30px;
 }  
@@ -53,7 +56,7 @@ h3 {
 h4 {
 	font-size: 19px;
 	line-height: 1.375em;
-	color: #28ace5;
+	color: #80808080;
 	font-weight: 400;
 	margin-bottom: 30px;
 }  
@@ -78,22 +81,31 @@ h4 {
 
 .navbar {
 	margin-bottom: 0;
-	background-color: #28ace5;
+	background-color: #FFFFFF;
 	z-index: 9999;
 	border: 0;
 	font-size: 12px !important;
 	line-height: 1.42857143 !important;
 	letter-spacing: 4px;
 	border-radius: 0;
+  font-weight: 600;
 }
 
-.navbar li a, .navbar .navbar-brand {
-	color: #fff !important;
+.navbar a {
+  color: #fff;
+  margin-right: 8px;
+}
+
+.navbar li, .navbar .navbar-brand {
+	color: #28ace5 !important;
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-	color: #28ace5 !important;
-	background-color: #fff !important;
+	color: #fff !important;
+	background-color: #28ace5 !important;
+  border-radius: 5px;
+  padding: 15px;
+  
 }
 
 .navbar-default .navbar-toggle {
@@ -169,7 +181,11 @@ footer .glyphicon {
   background: #28ace5;
   cursor: pointer;
 }
-  
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+}
 
 .our-team{
     padding: 20px 15px 30px;
@@ -186,8 +202,17 @@ footer .glyphicon {
     margin-bottom: 25px;
     transition: all 0.5s ease 0s;
 }
+
+.member {
+  transition: color 0.5s ease;
+}
+
+.member:hover {
+  color: #28ace5;
+  transform: scale(1.2);
+}
 .our-team:hover .pic{
-    background: #28ace5;
+    border-color: #28ace5;
     border-radius: 20%;
     -webkit-border-radius: 20%;
     -moz-border-radius: 20%;
@@ -238,7 +263,7 @@ footer .glyphicon {
     -ms-border-radius: 10%;
     -o-border-radius: 10%;
 }
-.our-team:hover .social li a{
+.social:hover li a{
     background: #28ace5;
     color: #fff;
 }
