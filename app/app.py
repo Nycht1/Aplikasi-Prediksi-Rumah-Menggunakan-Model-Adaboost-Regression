@@ -1,22 +1,16 @@
-'''
-	Contoh Deloyment untuk Domain Data Science (DS)
-	Orbit Future Academy - AI Mastery - KM Batch 3
-	Tim Deployment
-	2022
-'''
-
 # =[Modules dan Packages]========================
-
-from flask import Flask, render_template, request, jsonify
-import pandas as pd
 import numpy as np
-from sklearn.tree import DecisionTreeClassifier
+from flask import Flask, render_template, request, jsonify
+# from flask_ngrok import run_with_ngrok  #Karena engga make ngrok diapus aja
+import pandas as pd
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.model_selection import train_test_split
 from joblib import load
 
 # =[Variabel Global]=============================
 
 app = Flask(__name__, static_url_path='/static')
-model = None
+model_AB = None
 
 # =[Routing]=====================================
 
@@ -28,53 +22,97 @@ def beranda():
 
 
 # [Routing untuk API]
-@app.route("/api/deteksi", methods=['POST'])
-def apiDeteksi():
-  # Nilai default untuk variabel input atau features (X) ke model
-  input_sepal_length = 5.1
-  input_sepal_width = 3.5
-  input_petal_length = 1.4
-  input_petal_width = 0.2
+@app.route(
+  "/api/prediksi", methods=['POST']
+)  ##file api/prediksi liat dimana mat?## api prediksi itu path route nya pal bukan file
+def apiPrediksi():
+  # float_feature = [float(x) for x in request.form.values()]
+  # feature = [np.array(float_feature)]
+  # prediksi = model_AB.prediksi(feature)
+  # return render_template("test.html", prediksi_text="{}".format(prediksi))
 
+  # Nilai default untuk variabel input atau features (X) ke model
+  input_Lokasi = 7
+  input_Tipe = 3
+  input_KT = 2
+  input_KM = 1
+  input_Listrik = 2
+
+  # POST data dari API
   if request.method == 'POST':
     # Set nilai untuk variabel input atau features (X) berdasarkan input dari pengguna
-    input_sepal_length = float(request.form['sepal_length'])
-    input_sepal_width = float(request.form['sepal_width'])
-    input_petal_length = float(request.form['petal_length'])
-    input_petal_width = float(request.form['petal_width'])
+    # $("#range_sepal_length").val();
+    input_Lokasi = str(request.form.get('lokasi'))
+    input_Tipe = str(request.form.get('tipe_rumah'))
+    input_KT = str(request.form.get('kamar_tidur'))
+    input_KM = str(request.form.get('kamar_mandi'))
+    input_Listrik = str(request.form.get('tipe_listrik'))
 
-    # Prediksi kelas atau spesies bunga iris berdasarkan data pengukuran yg diberikan pengguna
-    df_test = pd.DataFrame(
+    # Membuat dataframe pandas
+    df = pd.DataFrame(
       data={
-        "SepalLengthCm": [input_sepal_length],
-        "SepalWidthCm": [input_sepal_width],
-        "PetalLengthCm": [input_petal_length],
-        "PetalWidthCm": [input_petal_width]
+        "Lokasi": [input_Lokasi],
+        "Tipe": [input_Tipe],
+        "KT": [input_KT],
+        "KM": [input_KM],
+        "Listrik": [input_Listrik],
       })
 
-    hasil_prediksi = model.predict(df_test[0:1])[0]
+    # Encoder lokasi
+    df['Lokasi'] = df['Lokasi'].map({
+      'Jakarta Pusat': 0,
+      'Jakarta Timur': 1,
+      'Jakarta Selatan': 2,
+      'Jakarta Barat': 3,
+      'Jakarta Utara': 4,
+      'Kota Bogor': 5,
+      'Kabupaten Bogor': 6,
+      'Depok': 7,
+      'Tangerang': 8,
+      'Kota Bekasi': 9,
+      'Kabupaten Bekasi': 10
+    })
 
-    # Set Path untuk gambar hasil prediksi
-    if hasil_prediksi == 'Iris-setosa':
-      gambar_prediksi = '/static/images/iris_setosa.jpg'
-    elif hasil_prediksi == 'Iris-versicolor':
-      gambar_prediksi = '/static/images/iris_versicolor.jpg'
-    else:
-      gambar_prediksi = '/static/images/iris_virginica.jpg'
+    # Encoder tipe rumah
+    df['Tipe'] = df['Tipe'].map({
+      'Tipe 21': 0,
+      'Tipe 36': 1,
+      'Tipe 45': 2,
+      'Tipe 54': 3,
+      'Tipe 60': 4,
+      'Tipe 70': 5,
+      'Tipe 90': 6,
+      'Tipe 120': 7,
+      'Tipe 140': 8
+    })
+
+    # Encoder listrik
+    df['Listrik'] = df['Listrik'].map({'900': 0, '1300': 1, '2200': 2})
+
+    print(df)
+    print(df[0:1])
+
+    #Menampilkan Prediksi model adaboost
+    hasil_prediksi = model_AB.predict(df[0:1])[0]
+
+    print(hasil_prediksi)
+
+    hasil_prediksi_conv = f"Rp. {hasil_prediksi:,.2f}"
 
     # Return hasil prediksi dengan format JSON
-    return jsonify({
-      "prediksi": hasil_prediksi,
-      "gambar_prediksi": gambar_prediksi
-    })
+    return jsonify({"prediksi": hasil_prediksi_conv})
 
 
 # =[Main]========================================
 
 if __name__ == '__main__':
-
   # Load model yang telah ditraining
-  model = load('model_iris_dt.model')
+  model_AB = load('prediksi_harga_rumah.model')
 
-  # Run Flask di localhost
-  app.run(host="0.0.0.0", port=5000, debug=True)
+  # Run Flask di Google Colab menggunakan ngrok
+  # run_with_ngrok(
+  #   app
+  # )  # <-- Ngrok susah kalo di replit ganti jadi harus run ga pake ngrok terus host nya diganti "0.0.0.0"
+
+  app.run(host="0.0.0.0", port=4000, debug=True)  # <-- Harusnya gini
+  # app.run()

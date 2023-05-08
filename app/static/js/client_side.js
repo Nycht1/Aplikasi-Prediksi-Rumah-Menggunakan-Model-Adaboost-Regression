@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ $(document).ready(function(){
   
   // -[Animasi Scroll]---------------------------
   
@@ -32,29 +32,38 @@ $(document).ready(function(){
     e.preventDefault();
 	
 	// Set data pengukuran bunga iris dari input pengguna
-    var input_sepal_length = $("#range_sepal_length").val(); 
-	var input_sepal_width  = $("#range_sepal_width").val(); 
-	var input_petal_length = $("#range_petal_length").val(); 
-	var input_petal_width  = $("#range_petal_width").val(); 
+ //  var input_sepal_length = $("#range_sepal_length").val(); 
+	// var input_sepal_width  = $("#range_sepal_width").val(); 
+	// var input_petal_length = $("#range_petal_length").val(); 
+	// var input_petal_width  = $("#range_petal_width").val(); 
+
+    var input_lokasi = $("#lokasi").val(); 
+    var input_Kamar_Tidur = $("#kamar_tidur").val(); 
+    var input_Tipe_Rumah = $("#tipe_rumah").val();
+    var input_Tipe_Listrik = $("#tipe_listrik").val();
+    var input_Kamar_Mandi = $("#kamar_mandi").val();
 
 	// Panggil API dengan timeout 1 detik (1000 ms)
     setTimeout(function() {
 	  try {
 			$.ajax({
-			  url  : "/api/deteksi",
+			  url  : "/api/prediksi",
 			  type : "POST",
-			  data : {"sepal_length" : input_sepal_length,
-					  "sepal_width"  : input_sepal_width,
-					  "petal_length" : input_petal_length,
-					  "petal_width"  : input_petal_width,
-			         },
+			  data : {
+          "lokasi" : input_lokasi,
+          "kamar_tidur"  : input_Kamar_Tidur,
+          "tipe_rumah" : input_Tipe_Rumah,
+          "tipe_listrik"  : input_Tipe_Listrik,
+          "kamar_mandi"  : input_Kamar_Mandi,
+        },
 			  success:function(res){
 				// Ambil hasil prediksi spesies dan path gambar spesies dari API
 				res_data_prediksi   = res['prediksi']
-				res_gambar_prediksi = res['gambar_prediksi']
-				
+				// res_gambar_prediksi = res['gambar_prediksi']
+
+          console.log(res_data_prediksi)
 				// Tampilkan hasil prediksi ke halaman web
-			    generate_prediksi(res_data_prediksi, res_gambar_prediksi); 
+			    generate_prediksi(res_data_prediksi); 
 			  }
 			});
 		}
@@ -68,12 +77,12 @@ $(document).ready(function(){
   })
     
   // Fungsi untuk menampilkan hasil prediksi model
-  function generate_prediksi(data_prediksi, image_prediksi) {
+  function generate_prediksi(data_prediksi) {
     var str="";
     str += "<h3>Hasil Prediksi </h3>";
     str += "<br>";
-    str += "<img src='" + image_prediksi + "' width=\"200\" height=\"150\"></img>"
-    str += "<h3>" + data_prediksi + "</h3>";
+    // str += "<img src='" + image_prediksi + "' width=\"200\" height=\"150\"></img>";
+    str += "<h3>" +"Harga rumah impian anda adalah sebesar "+ data_prediksi + "</h3>";
     $("#hasil_prediksi").html(str);
   }  
   
