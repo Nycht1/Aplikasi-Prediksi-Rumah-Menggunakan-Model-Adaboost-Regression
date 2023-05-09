@@ -111,7 +111,7 @@ def apiPrediksi():
 
     print(hasil_prediksi)
 
-    hasil_prediksi_conv = f"Rp. {hasil_prediksi:,.2f}"
+    hasil_prediksi_conv = f"Rp. {hasil_prediksi:,.0f}"
 
     # Return hasil prediksi dengan format JSON
     return jsonify({"prediksi": hasil_prediksi_conv})
