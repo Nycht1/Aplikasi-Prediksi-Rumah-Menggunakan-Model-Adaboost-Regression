@@ -28,7 +28,8 @@
       
 			<!-- Logo -->
 			<div class="navbar-header">
-				<img src={{ url_for('static', filename='/images/logo_muzero 1.png') }} alt="Orbit Logo" 
+				<img 
+          src={{ url_for('static', filename='/images/logo_muzero 1.png') }} alt="Orbit Logo" 
 				width="50" height="50" align="left">
 				<a class="navbar-brand" href="#halamanku">&#160; Muzero 1</a>
 			</div>
@@ -55,7 +56,7 @@
 			<div class="col-sm-6">
 				<!-- Deskripsi Aplikasi -->
 				<h2>Price My Home</h2>
-        <h4>Prediksi Harga Rumah di Jabodetabek</h4><br>
+        <h4>Prediksi Harga Rumah di Jabodetabek</h4><br> 
 				<p style="text-align: justify;text-justify: inter-word;">
 					Selamat datang di Price My Home. Aplikasi akan membantu Anda mencarikan harga rumah yang ingin Anda cari di Jabodetabek bedasarkan <i>Lokasi</i> , <i>Tipe Rumah</i> ,                <i>Tipe Listrik</i>, <i>Kamar Tidur</i> dan <i>Kamar Mandi</i>.
 					Ingin cari tahu berapa harga rumah idaman Anda? Cek di bawah ya!
@@ -76,8 +77,9 @@
         <br>
 				<br>
 				<!-- Gambar Deskripsi Aplikasi -->
-				<img src={{ url_for('static', filename='/images/placeholder.jpg') }} width="500" ></img>
-        Ini cuma placeholder sampe dapet gambar yang bagus :)
+				<img 
+          style="border-radius: 1em;"
+          src={{ url_for('static', filename='/images/house_stat.png') }} width="500" ></img>
       </div>
     </div>
   </div>
@@ -92,103 +94,132 @@
 			<div class="col-sm-6">
 				</br>
 				<!-- Input Nilai Pengukuran dari Pengguna -->
-				<h3 style="margin-left: 50px;">Masukkan data rumah yang ingin anda cari  </h3>
-        
-        <form action="app/app.py">
-          <label for="cars">Lokasi Rumah:</label>
-          <select name="lokasi" id="lokasi">
-            <optgroup label="Lokasi">
-              <option value="Lokasi">-Pilih Lokasi-</option>
-              <option value="Jakarta Pusat">Jakarta Pusat</option>
-              <option value="Jakarta Timur">Jakarta Timur</option>
-              <option value="Jakarta Selatan">Jakarta Selatan</option>
-              <option value="Jakarta Barat">Jakarta Barat</option>
-              <option value="Jakarta Utara">Jakarta Utara</option>
-              <option value="Kota Bogor">Kota Bogor</option>
-              <option value="Kabupaten Bogor">Kabupaten Bogor</option>
-              <option value="Depok">Depok</option>
-              <option value="Tangerang">Tangerang</option>
-              <option value="Kota Bekasi">Kota Bekasi</option>
-              <option value="Kabupaten Bekasi">Kabupaten Bekasi</option>
-            </optgroup>
-          </select>
-        </form>
-
-        <form action="app/app.py">
-          <label for="cars">Tipe Rumah:</label>
-          <select name="tipe_rumah" id="tipe_rumah">
-            <optgroup label="Tipe_Rumah">
-              <option value="Lokasi">-Pilih Tipe Rumah-</option>
-              <option value="Tipe 21">Tipe 21</option>
-              <option value="Tipe 36">Tipe 36</option>
-              <option value="Tipe 45">Tipe 45</option>
-              <option value="Tipe 54">Tipe 54</option>
-              <option value="Tipe 60">Tipe 60</option>
-              <option value="Tipe 70">Tipe 70</option>
-              <option value="Tipe 90">Tipe 90</option>
-              <option value="Tipe 120">Tipe 120</option>
-              <option value="Tipe 140">Tipe 140</option>
-            </optgroup>
-          </select>
-        </form>
-
-        <form action="app/app.py">
-          <label for="cars">Tipe Listrik:</label>
-          <select name="tipe_listrik" id="tipe_listrik">
-            <optgroup label="Tipe_Listrik">
-              <option value="Lokasi">-Pilih Tipe Listrik-</option>
-              <option value="900">900</option>
-              <option value="1300">1300</option>
-              <option value="2200">2200</option>
-            </optgroup>
-          </select>
-        </form>
-
-        <form action="app/app.py">
-          <label for="cars">Kamar Tidur:</label>
-          <select name="kamar_tidur" id="kamar_tidur">
-            <optgroup label="Kamar_Tidur">
-              <option value="KT">-Pilih Kamar Tidur-</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </optgroup>
-          </select>
-        </form>
-
-        <form action="app/app.py">
-          <label for="cars">Kamar Mandi:</label>
-          <select name="kamar_mandi" id="kamar_mandi">
-            <optgroup label="Kamar_Mandi">
-              <option value="KM">-Pilih Kamar Mandi-</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </optgroup>
-          </select>
-        </form>
-        <div>
+        <div class="row">
+  				<h3 style="margin-left: 50px;"><b>Masukkan data rumah yang ingin anda cari</b>  </h3>
+  
+          <div class="opt-group">
+            <div class="col-md-4 col-sm-6">
+              <form action="app/app.py">
+                <label for="cars">Lokasi Rumah:</label>
+                <select name="lokasi" id="lokasi" class="select-app">
+                  <optgroup label="Lokasi">
+                    <option classname ="opt" value="Lokasi">-Pilih Lokasi-</option>
+                    <option classname ="opt" value="Jakarta Pusat">Jakarta Pusat</option>
+                    <option classname ="opt" value="Jakarta Timur">Jakarta Timur</option>
+                    <option classname ="opt" value="Jakarta Selatan">Jakarta Selatan</option>
+                    <option classname ="opt" value="Jakarta Barat">Jakarta Barat</option>
+                    <option classname ="opt" value="Jakarta Utara">Jakarta Utara</option>
+                    <option classname ="opt" value="Kota Bogor">Kota Bogor</option>
+                    <option classname ="opt" value="Kabupaten Bogor">Kabupaten Bogor</option>
+                    <option classname ="opt" value="Depok">Depok</option>
+                    <option classname ="opt" value="Tangerang">Tangerang</option>
+                    <option classname ="opt" value="Kota Bekasi">Kota Bekasi</option>
+                    <option classname ="opt" value="Kabupaten Bekasi">Kabupaten Bekasi</option>
+                  </optgroup>
+                </select>
+              </form>
+            </div>
+    
+            <div class="col-md-4 col-sm-6">
+              <form action="app/app.py">
+                <label for="cars">Tipe Rumah:</label>
+                <select name="tipe_rumah" id="tipe_rumah" class="select-app">
+                  <optgroup label="Tipe_Rumah">
+                    <option classname ="opt" value="tipe_rumah">-Pilih Tipe Rumah-</option>
+                    <option classname ="opt" value="Tipe 21">Tipe 21</option>
+                    <option classname ="opt" value="Tipe 36">Tipe 36</option>
+                    <option classname ="opt" value="Tipe 45">Tipe 45</option>
+                    <option classname ="opt" value="Tipe 54">Tipe 54</option>
+                    <option classname ="opt" value="Tipe 60">Tipe 60</option>
+                    <option classname ="opt" value="Tipe 70">Tipe 70</option>
+                    <option classname ="opt" value="Tipe 90">Tipe 90</option>
+                    <option classname ="opt" value="Tipe 120">Tipe 120</option>
+                    <option classname ="opt" value="Tipe 140">Tipe 140</option>
+                  </optgroup>
+                </select>
+              </form>
+            </div>
+    
+            <div class="col-md-4 col-sm-6">
+              <form action="app/app.py">
+                <label for="cars">Tipe Listrik:</label>
+                <select name="tipe_listrik" id="tipe_listrik" class="select-app">
+                  <optgroup label="Tipe_Listrik">
+                    <option classname ="opt" value="tipe_listrik">-Pilih Tipe Listrik-</option>
+                    <option classname ="opt" value="900">900</option>
+                    <option classname ="opt" value="1300">1300</option>
+                    <option classname ="opt" value="2200">2200</option>
+                  </optgroup>
+                </select>
+              </form>
+            </div>
+    
+            <div class="col-md-4 col-sm-6">
+              <form action="app/app.py">
+                <label for="cars">Kamar Tidur:</label>
+                <select name="kamar_tidur" id="kamar_tidur" class="select-app">
+                  <optgroup label="Kamar_Tidur">
+                    <option classname ="opt" value="KT">-Pilih Kamar Tidur-</option>
+                    <option classname ="opt" value="1">1</option>
+                    <option classname ="opt" value="2">2</option>
+                    <option classname ="opt" value="3">3</option>
+                    <option classname ="opt" value="4">4</option>
+                    <option classname ="opt" value="5">5</option>
+                  </optgroup>
+                </select>
+              </form>
+            </div>
+    
+            <div class="col-md-4 col-sm-6">
+              <form action="app/app.py">
+                <label for="cars">Kamar Mandi:</label>
+                <select name="kamar_mandi" id="kamar_mandi" class="select-app">
+                  <optgroup label="Kamar_Mandi">
+                    <option classname ="opt" value="KM">-Pilih Kamar Mandi-</option>
+                    <option classname ="opt" value="1">1</option>
+                    <option classname ="opt" value="2">2</option>
+                    <option classname ="opt" value="3">3</option>
+                    <option classname ="opt" value="4">4</option>
+                    <option classname ="opt" value="5">5</option>
+                  </optgroup>
+                </select>
+              </form>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row"
+          style="
+          display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+          padding-top: 5px;
+          ">
           <button type="submit" id="prediksi_submit" class="btn btn-default btn-lg">Prediksi</button>
-
-		</div>
+    </div>
+        
+        
+      </div>
+      <div class="col-sm-6">
+        <br>
+        <h3 style="margin-left: 50px;"><b>Hasil Prediksi :   </b></h3>
+        <div id="hasil_prediksi" align="center">
+						<!-- Hasil Prediksi akan ditampilkan di sini-->
+        </div>
+        
+      </div>
 		<br>
 		<br>
 	</div>
-      <div class="col-sm-6">
-        <br>
-        <div id="hasil_prediksi" align="center">
-						<!-- Hasil Prediksi akan ditampilkan di sini-->
-				</div>
-        
-      </div>
-      
+    
+  </div>
 
 
-
+  <br>
+  <br>
+  <div class="container">
+    <h3><b>Anggota Kelompok</b></h3>
+  </div>
+  
 	<div id = anggotaKelompok class="container">
         <div class="row member-list">
             <div class="member col-md-4 col-sm-6">

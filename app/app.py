@@ -32,21 +32,35 @@ def apiPrediksi():
   # return render_template("test.html", prediksi_text="{}".format(prediksi))
 
   # Nilai default untuk variabel input atau features (X) ke model
-  input_Lokasi = 7
-  input_Tipe = 3
-  input_KT = 2
-  input_KM = 1
-  input_Listrik = 2
+  input_Lokasi = 'Depok'
+  input_Tipe = 'Tipe 70'
+  input_KT = '2'
+  input_KM = '1'
+  input_Listrik = '2200'
 
   # POST data dari API
   if request.method == 'POST':
     # Set nilai untuk variabel input atau features (X) berdasarkan input dari pengguna
     # $("#range_sepal_length").val();
+
     input_Lokasi = str(request.form.get('lokasi'))
     input_Tipe = str(request.form.get('tipe_rumah'))
     input_KT = str(request.form.get('kamar_tidur'))
     input_KM = str(request.form.get('kamar_mandi'))
     input_Listrik = str(request.form.get('tipe_listrik'))
+
+    print(f'test : {input_KT}')
+
+    if input_Lokasi == "Lokasi":
+      input_Lokasi = "Jakarta Pusat"
+    if input_Tipe == "tipe_rumah":
+      input_Tipe = "Tipe 36"
+    if input_KT == "KT":
+      input_KT = "1"
+    if input_KM == "KM":
+      input_KM = "1"
+    if input_Listrik == "tipe_listrik":
+      input_Listrik = "1300"
 
     # Membuat dataframe pandas
     df = pd.DataFrame(
