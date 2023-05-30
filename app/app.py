@@ -2,15 +2,14 @@
 import numpy as np
 from flask import Flask, render_template, request, jsonify
 # from flask_ngrok import run_with_ngrok  #Karena engga make ngrok diapus aja
+from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.model_selection import train_test_split
 from joblib import load
 
 # =[Variabel Global]=============================
 
 app = Flask(__name__, static_url_path='/static')
-model_AB = None
+model = None
 
 # =[Routing]=====================================
 
@@ -18,7 +17,7 @@ model_AB = None
 # [Routing untuk Halaman Utama atau Home]
 @app.route("/")
 def beranda():
-  return render_template('index.html')
+  return render_template('test.html')
 
 
 # [Routing untuk API]
@@ -28,15 +27,17 @@ def beranda():
 def apiPrediksi():
   # float_feature = [float(x) for x in request.form.values()]
   # feature = [np.array(float_feature)]
-  # prediksi = model_AB.prediksi(feature)
+  # prediksi = model.prediksi(feature)
   # return render_template("test.html", prediksi_text="{}".format(prediksi))
 
   # Nilai default untuk variabel input atau features (X) ke model
-  input_Lokasi = 'Depok'
-  input_Tipe = 'Tipe 70'
+  input_Lokasi = '3'
+  input_Luas_Tanah = '70'
+  input_Luas_Bangunan = '70'
   input_KT = '2'
   input_KM = '1'
   input_Listrik = '2200'
+  input_Garasi = '0'
 
   # POST data dari API
   if request.method == 'POST':
@@ -44,84 +45,114 @@ def apiPrediksi():
     # $("#range_sepal_length").val();
 
     input_Lokasi = str(request.form.get('lokasi'))
-    input_Tipe = str(request.form.get('tipe_rumah'))
+    input_Luas_Tanah = str(request.form.get('luas_tanah'))
+    input_Luas_Bangunan = str(request.form.get('luas_bangunan'))
     input_KT = str(request.form.get('kamar_tidur'))
     input_KM = str(request.form.get('kamar_mandi'))
-    input_Listrik = str(request.form.get('tipe_listrik'))
+    input_Listrik = str(request.form.get('listrik'))
+    input_Garasi = str(request.form.get('garasi'))
 
     print(f'test : {input_KT}')
 
     if input_Lokasi == "Lokasi":
-      input_Lokasi = "Jakarta Pusat"
-    if input_Tipe == "tipe_rumah":
-      input_Tipe = "Tipe 36"
+      input_Lokasi = "3"
     if input_KT == "KT":
-      input_KT = "1"
+      input_KT = "2"
     if input_KM == "KM":
-      input_KM = "1"
-    if input_Listrik == "tipe_listrik":
-      input_Listrik = "1300"
+      input_KM = "11"
+    if input_Listrik == "listrik":
+      input_Listrik = "2200"
+    if input_Garasi == "Garasi":
+      input_Garasi = "0"
+
+    # Load data ke dalam DataFrame
+    data = pd.read_csv(
+      'https://raw.githubusercontent.com/Peksyaji/My_Home/main/Data/Rumah%20Jabodetabek.csv',
+      sep=';')
+
+    # Preprocessing data untuk model rekomendasi
+    # Encoder lokasi
+    data['lokasi'] = data['lokasi'].map({
+      'Kota Jakarta': 0,
+      'Kota Bogor': 1,
+      'Kabupaten Bogor': 2,
+      'Kota Depok': 3,
+      'Kota Tangerang': 4,
+      'Kota Bekasi': 5,
+      'Kabupaten Bekasi': 6
+    })
+
+    # Encoder garasi/carport
+    data['garasi_carport'] = data['garasi_carport'].map({
+      'Ada': 0,
+      'Tidak ada': 1
+    })
 
     # Membuat dataframe pandas
     df = pd.DataFrame(
       data={
-        "Lokasi": [input_Lokasi],
-        "Tipe": [input_Tipe],
+        "lokasi": [input_Lokasi],
+        "LT": [input_Luas_Tanah],
+        "LB": [input_Luas_Bangunan],
         "KT": [input_KT],
         "KM": [input_KM],
-        "Listrik": [input_Listrik],
+        "listrik": [input_Listrik],
+        "garasi_carport": [input_Garasi],
       })
 
-    # Encoder lokasi
-    df['Lokasi'] = df['Lokasi'].map({
-      'Jakarta Pusat': 0,
-      'Jakarta Timur': 1,
-      'Jakarta Selatan': 2,
-      'Jakarta Barat': 3,
-      'Jakarta Utara': 4,
-      'Kota Bogor': 5,
-      'Kabupaten Bogor': 6,
-      'Depok': 7,
-      'Tangerang': 8,
-      'Kota Bekasi': 9,
-      'Kabupaten Bekasi': 10
-    })
+    #Mendapatkan rekomendasi rumah berdasarkan input pengguna
+    X = data.drop('harga', axis=1)
+    similarity_matrix = cosine_similarity(df, X)
 
-    # Encoder tipe rumah
-    df['Tipe'] = df['Tipe'].map({
-      'Tipe 21': 0,
-      'Tipe 36': 1,
-      'Tipe 45': 2,
-      'Tipe 54': 3,
-      'Tipe 60': 4,
-      'Tipe 70': 5,
-      'Tipe 90': 6,
-      'Tipe 120': 7,
-      'Tipe 140': 8
-    })
+    # Fungsi untuk mendapatkan 5 rekomendasi berdasarkan rumah yang dipilih
+    def get_recommendations(similarity_matrix, data, n=5):
+      rumah_indices = similarity_matrix.argsort()[0][
+        -n:]  # Ambil indeks rumah yang paling mirip dengan input pengguna
+      recommended_rumah = data.iloc[rumah_indices]
+      return recommended_rumah
 
-    # Encoder listrik
-    df['Listrik'] = df['Listrik'].map({'900': 0, '1300': 1, '2200': 2})
+    rekomendasi = get_recommendations(similarity_matrix, data)
+
+    print(f'test sistem rekomendasi :\n {rekomendasi}')
+    print(f' Baris 1 Kolom lokasi : \n{rekomendasi.iloc[0,0]}')
+
+    # array_rekomendasi = []
+    # for i in range(len(rekomendasi)):
+    #   print(rekomendasi.iloc[i])
+    #   array_rekomendasi.append(rekomendasi.iloc[i])
+    df_rekomendasi = rekomendasi.to_json(orient='records')
 
     print(df)
     print(df[0:1])
 
     #Menampilkan Prediksi model adaboost
-    hasil_prediksi = model_AB.predict(df[0:1])[0]
+    hasil_prediksi = model.predict(df[0:1])[0]
 
-    print(hasil_prediksi)
+    print(f'Hasil prediksi belum dikonversi:{hasil_prediksi}')
 
-    hasil_prediksi_conv = f"Rp. {hasil_prediksi:,.0f}"
+    hasil_prediksi_conv = np.exp(hasil_prediksi)
+
+    print(f'Hasil prediksi setelah dikonversi:{hasil_prediksi_conv}')
+
+    hasil_prediksi_conv = hasil_prediksi_conv / 1000000
+    hasil_prediksi_conv = int(hasil_prediksi_conv)
+    hasil_prediksi_conv = hasil_prediksi_conv * 1000000
+    hasil_prediksi_conv = format(hasil_prediksi_conv, ',d')
+
+    hasil_prediksi_conv = f"Rp{hasil_prediksi_conv}"
 
     # Return hasil prediksi dengan format JSON
-    return jsonify({"prediksi": hasil_prediksi_conv})
+    return jsonify({
+      "prediksi": hasil_prediksi_conv,
+      "rekomendasi": df_rekomendasi
+    })
 
 
 # =[Main]========================================
 
 if __name__ == '__main__':
   # Load model yang telah ditraining
-  model_AB = load('prediksi_harga_rumah.model')
+  model = load('alaya.model')
 
   # Run Flask di Google Colab menggunakan ngrok
   # run_with_ngrok(
