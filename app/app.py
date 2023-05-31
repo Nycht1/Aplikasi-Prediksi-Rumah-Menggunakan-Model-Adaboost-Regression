@@ -17,7 +17,7 @@ model = None
 # [Routing untuk Halaman Utama atau Home]
 @app.route("/")
 def beranda():
-  return render_template('test.html')
+  return render_template('index.html')
 
 
 # [Routing untuk API]
@@ -29,15 +29,6 @@ def apiPrediksi():
   # feature = [np.array(float_feature)]
   # prediksi = model.prediksi(feature)
   # return render_template("test.html", prediksi_text="{}".format(prediksi))
-
-  # Nilai default untuk variabel input atau features (X) ke model
-  input_Lokasi = '3'
-  input_Luas_Tanah = '70'
-  input_Luas_Bangunan = '70'
-  input_KT = '2'
-  input_KM = '1'
-  input_Listrik = '2200'
-  input_Garasi = '0'
 
   # POST data dari API
   if request.method == 'POST':
@@ -54,6 +45,7 @@ def apiPrediksi():
 
     print(f'test : {input_KT}')
 
+    # Nilai default untuk variabel input atau features (X) ke model
     if input_Lokasi == "Lokasi":
       input_Lokasi = "3"
     if input_KT == "KT":
@@ -104,8 +96,8 @@ def apiPrediksi():
     X = data.drop('harga', axis=1)
     similarity_matrix = cosine_similarity(df, X)
 
-    # Fungsi untuk mendapatkan 5 rekomendasi berdasarkan rumah yang dipilih
-    def get_recommendations(similarity_matrix, data, n=5):
+    # Fungsi untuk mendapatkan 6 rekomendasi berdasarkan rumah yang dipilih
+    def get_recommendations(similarity_matrix, data, n=6):
       rumah_indices = similarity_matrix.argsort()[0][
         -n:]  # Ambil indeks rumah yang paling mirip dengan input pengguna
       recommended_rumah = data.iloc[rumah_indices]

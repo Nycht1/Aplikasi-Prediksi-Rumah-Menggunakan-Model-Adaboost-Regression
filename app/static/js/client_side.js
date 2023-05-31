@@ -96,9 +96,13 @@
   function generate_rekomendasi(data_rekomendasi) {
 
     var table = document.getElementById('hasil_rekomendasi')
+    console.log(`isi dari elemen table ${table}`)
     var obj_json = JSON.parse(data_rekomendasi);
-    var row;
+    var row = "";
+    table.innerHTML = row;
+    var count = 0;
     obj_json.forEach((data) => {
+      console.log(`Iterasi ke-${count}`)
       console.log(`Lokasi : ${data.lokasi}`);
       console.log(`Luas Tanah : ${data.LT}`);
       console.log(`Luas Bangunan : ${data.LB}`);
@@ -114,6 +118,8 @@
       // 'Kota Tangerang':4,
       // 'Kota Bekasi':5,
       // 'Kabupaten Bekasi':6
+
+      
       var str_lokasi;
       console.log(`Cek data.lokasi : ${data.lokasi}`)
       switch(data.lokasi) {
@@ -167,10 +173,8 @@
           console.log('Input Garasi Salah!')
       }
       
-      row += `
+      row = `
         <li>
-          <a class="fa-solid fa-house">
-  				</a>
   				<div class="card-content">
   					<h3 class="h3">
   						<a class="card-title">
@@ -189,7 +193,7 @@
   
   						<li class="card-item">
   							<div class="item-icon">
-  								<a class="fa-regular fa-cube">
+  								<a class="fa-solid fa-cube">
   								</a>
   							</div>
   
@@ -201,7 +205,7 @@
   								<a class="fa-solid fa-bed">
   								</a>
   							</div>
-  							<span class="item-text">${data.KT} Kamar Tidur</span>
+  							<span class="item-text">${data.KT} KT</span>
   						</li>
   
   						<li class="card-item">
@@ -209,7 +213,7 @@
   								<a class="fa-solid fa-bath">
   								</a>
   							</div>
-  							<span class="item-text">${data.KM} Kamar Mandi</span>
+  							<span class="item-text">${data.KM} KM</span>
   						</li>
   
   						<li class="card-item">
@@ -222,7 +226,7 @@
   
   						<li class="card-item">
   							<div class="item-icon">
-  								<a class="fa-solid fa-garage">
+  								<a class="fa-solid fa-warehouse">
   								</a>
   							</div>
   							<span class="item-text">${str_garasi}</span>
@@ -232,7 +236,7 @@
   					<div class="card-meta">
   						<div>
   							<span class="meta-title">Harga</span>
-  							<span class="meta-text">Rp${data.harga}</span>
+  							<span class="meta-text">Rp ${new Intl.NumberFormat('en-US').format(data.harga)}</span>
   						</div>
   					</div>
   				</div>
@@ -256,12 +260,16 @@
       //     </ul>
       //   </div>
       console.log(table);
+
+      table.innerHTML += row
     });
 
-      table.innerHTML = row
+      
     // console.log(typeof(data_rekomendasi));
 
     // $("#tabel_rekomendasi").html(str_rekomendasi);
+
+    count+=1;
 
   } 
 })
