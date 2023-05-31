@@ -58,10 +58,7 @@ def apiPrediksi():
       input_Garasi = "0"
 
     # Load data ke dalam DataFrame
-    data = pd.read_csv(
-      'https://raw.githubusercontent.com/Peksyaji/My_Home/main/Data/Rumah%20Jabodetabek.csv',
-      sep=';')
-
+    data = pd.read_csv('data_rumah_jabodetabek.csv', sep=';')
     # Preprocessing data untuk model rekomendasi
     # Encoder lokasi
     data['lokasi'] = data['lokasi'].map({
