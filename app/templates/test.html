@@ -122,7 +122,7 @@ type="text/css">
             <div class="container">
               <form action="app/app.py" class="w-100 form-lokasi">
                 <label for="lokasi" style="width:100%;">Lokasi Rumah:</label>
-                <select name="lokasi" id="lokasi" class="select-app" >
+                <select name="lokasi" id="lokasi" class="select-app" data-toggle="tooltip" data-placement="top" title="nilai default : depok">
                   <optgroup label="Lokasi">
                     <option classname ="opt" value="Lokasi">-Lokasi Rumah-</option>
                     <option classname ="opt" value="0">Kota Jakarta</option>
@@ -199,7 +199,7 @@ type="text/css">
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <form action="app/app.py">
                   <label for="cars">Daya Listrik:</label>
-                  <select name="listrik" id="listrik" class="select-app">
+                  <select name="listrik" id="listrik" class="select-app" data-toggle="tooltip" data-placement="top" title="nilai default : 2200">
                     <optgroup label="Listrik">
                       <option classname ="opt" value="listrik">-Jenis Daya listrik-</option>
                       <option classname ="opt" value="900">900</option>
@@ -216,7 +216,7 @@ type="text/css">
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <form action="app/app.py">
                   <label for="cars">Jumlah kamar tidur:</label>
-                  <select name="kamar_tidur" id="kamar_tidur" class="select-app">
+                  <select name="kamar_tidur" id="kamar_tidur" class="select-app" data-toggle="tooltip" data-placement="top" title="nilai default : 2">
                     <optgroup label="Kamar_Tidur">
                       <option classname ="opt" value="KT">-Jumlah kamar tidur-</option>
                       <option classname ="opt" value="1">1</option>
@@ -237,7 +237,7 @@ type="text/css">
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <form action="app/app.py">
                   <label for="cars">Jumlah kamar mandi:</label>
-                  <select name="kamar_mandi" id="kamar_mandi" class="select-app">
+                  <select name="kamar_mandi" id="kamar_mandi" class="select-app" data-toggle="tooltip" data-placement="top" title="nilai default : 1">
                     <optgroup label="Kamar_Mandi">
                       <option classname ="opt" value="KM">-Jumlah kamar mandi-</option>
                       <option classname ="opt" value="1">1</option>
@@ -260,7 +260,7 @@ type="text/css">
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <form action="app/app.py">
                   <label for="cars">Garasi: </label>
-                  <select name="garasi" id="garasi" class="select-app">
+                  <select name="garasi" id="garasi" class="select-app" data-toggle="tooltip" data-placement="top" title="nilai default : Tidak Ada">
                     <optgroup label="Garasi">
                       <option classname ="opt" value="Garasi">-Apakah ada Garasi?-</option>
                       <option classname ="opt" value="0">Ada</option>
@@ -443,7 +443,7 @@ type="text/css">
                     <img src={{ url_for('static', filename='/images/peksy.jpg') }} alt="img_peksy">
                     <h3>PEKSYAJI</h3>
                     <p>Universitas Indonesia | Statistika</p>
-                    <p>Division Back-End</p>
+                    <p>Division Modelling (Data Science)</p>
                   
                     <a class="github-btn btn btn-default btn-lg fa-brands fa-github" href="https://github.com/Peksyaji" style="color:#000000 ;border-color: #000000;"> Github</a>
                     <a class="github-btn btn btn-default btn-lg fa fa-brands fa-linkedin" href="https://www.linkedin.com/in/peksyaji-8bab2a240" style="color:#000000 ;border-color: #000000;"> Linkedln</a>
@@ -479,7 +479,7 @@ type="text/css">
                     <img src={{ url_for('static', filename='/images/Meira.png') }} alt="img_meira">
                     <h3>RATU MEIRA R.Z.</h3>
                     <p>Institut Pertanian Bogor | Manajemen Industri Jasa Makanan Dan Gizi</p>
-                    <p>Division Front-End</p>
+                    <p>Division Modelling (Data Science)</p>
                   <a class="github-btn btn btn-default btn-lg fa fa-brands fa-linkedin" href="https://www.linkedin.com/in/ratu-meira-rasheeda-zahrah-37462a21a" style="color:#000000 ;border-color: #000000;"> Linkedln</a>
                 </div>
             </div>

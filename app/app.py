@@ -51,7 +51,7 @@ def apiPrediksi():
     if input_KT == "KT":
       input_KT = "2"
     if input_KM == "KM":
-      input_KM = "11"
+      input_KM = "1"
     if input_Listrik == "listrik":
       input_Listrik = "2200"
     if input_Garasi == "Garasi":
@@ -149,7 +149,7 @@ if __name__ == '__main__':
   # Run Flask di Google Colab menggunakan ngrok
   # run_with_ngrok(
   #   app
-  # )  # <-- Ngrok susah kalo di replit ganti jadi harus run ga pake ngrok terus host nya diganti "0.0.0.0"
+  # )  # <-- Ngrok susah kalo di replit, jadi harus run ga pake ngrok terus host nya diganti "0.0.0.0"
 
   app.run(host="0.0.0.0", port=4000, debug=True)  # <-- Harusnya gini
   # app.run()
