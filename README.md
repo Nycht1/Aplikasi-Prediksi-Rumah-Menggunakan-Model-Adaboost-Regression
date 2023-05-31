@@ -1,7 +1,7 @@
 
-# Aplikasi-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression
+# Alaya : Prediksi Harga Rumah Jabodetabek
 
-Aplikasi akan membantu Anda mencarikan harga rumah yang ingin Anda cari di Jabodetabek bedasarkan lokasi, Tipe Rumah, Tipe Listrik, Kamar Tidur, dan Kamar Mandi.
+Aplikasi akan membantu Anda mencarikan harga rumah yang ingin Anda cari di Jabodetabek bedasarkan Lokasi, Luas Bangunan, Tipe Listrik, Kamar Tidur, dan Kamar Mandi, dan Garasi. Kami juga akan memberikan Anda rekomendasi rumah sesuai keinginan Anda.
 
 
 ## Run
@@ -24,13 +24,18 @@ Untuk run programnya jalankan command berikut pada shell
 ```
 ## Screenshots
 
-![Halaman Deskripsi](https://github.com/Nycht1/Uprak-Deployment-Muzero1/blob/main/app/static/images/ss_deskripsi.png?raw=true)
+![Halaman Informasi](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/alaya_informasi.png?raw=true)
 
-![Halaman Aplikasi - kosong](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/ss_aplikasi_off.png?raw=true)
+![Halaman Aplikasi - kosong](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/alaya_aplikasi_0.png?raw=true)
 
-![Halaman Aplikasi - input](https://github.com/Nycht1/Uprak-Deployment-Muzero1/blob/main/app/static/images/ss_aplikasi_on.png?raw=true)
+![Halaman Aplikasi - berisi](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/alaya_aplikasi_1.png?raw=true)
 
-![Halaman Anggota](https://github.com/Nycht1/Uprak-Deployment-Muzero1/blob/main/app/static/images/ss_anggota.png?raw=true)
+![Halaman Rekomendasi](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/alaya_rekomendasi.png?raw=true)
+
+![Halmaan Pertanyaan](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/alaya_questions.png?raw=true)
+
+![Halaman Anggota & Footer](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/alaya_anggota_footer.jpeg?raw=true)
+
 
 
 ## 🚀 Anggota Kelompok
