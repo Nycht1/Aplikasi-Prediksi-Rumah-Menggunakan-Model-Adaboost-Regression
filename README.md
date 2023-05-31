@@ -1,7 +1,7 @@
 
 # Alaya : Prediksi Harga Rumah Jabodetabek
 
-Aplikasi akan membantu Anda mencarikan harga rumah yang ingin Anda cari di Jabodetabek bedasarkan Lokasi, Luas Bangunan, Tipe Listrik, Kamar Tidur, dan Kamar Mandi, dan Garasi. Kami juga akan memberikan Anda rekomendasi rumah sesuai keinginan Anda.
+Aplikasi akan membantu Anda mencarikan harga rumah yang ingin Anda cari di Jabodetabek bedasarkan Lokasi, Luas Bangunan, Tipe Listrik, Kamar Tidur, Kamar Mandi, dan Garasi. Kami juga akan memberikan Anda rekomendasi rumah sesuai keinginan Anda.
 
 
 ## Run
