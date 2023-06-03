@@ -9,7 +9,7 @@ Aplikasi akan membantu Anda mencarikan harga rumah yang ingin Anda cari di Jabod
 Untuk run programnya jalankan command berikut pada shell
 
 ```bash
-  git clone https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression
+  git clone https://github.com/Nycht1/Alaya-Prediksi-Harga-Rumah-Jabodetabek
 ```
 
 ```bash
