@@ -37,7 +37,7 @@ Untuk run programnya jalankan command berikut pada shell
 ![Halaman Anggota & Footer](https://github.com/Nycht1/Web-Prediksi-Harga-Rumah-Menggunakan-Model-Adaboost-Regression/blob/main/app/static/images/alaya_anggota_footer.jpeg?raw=true)
 
 
-Untuk Model dan file Python Notebook dapat dilihat pada repository github teman saya pada link berikut
+Untuk Model dan file Python Notebook dapat dilihat pada repository github salah satu anggota kelompok kami pada link berikut
 https://github.com/Peksyaji/Alaya
 
 
