@@ -58,7 +58,7 @@ def apiPrediksi():
       input_Garasi = "0"
 
     # Load data ke dalam DataFrame
-    data = pd.read_csv('data_rumah_jabodetabek.csv', sep=';')
+    data = pd.read_csv('app/data_rumah_jabodetabek.csv', sep=';')
     # Preprocessing data untuk model rekomendasi
     # Encoder lokasi
     data['lokasi'] = data['lokasi'].map({
@@ -141,7 +141,7 @@ def apiPrediksi():
 
 if __name__ == '__main__':
   # Load model yang telah ditraining
-  model = load('alaya.model')
+  model = load('app/alaya.model')
 
   # Run Flask di Google Colab menggunakan ngrok
   # run_with_ngrok(
